@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>福岡女子商業高等学校 | 未来の私をデザインする</title>
+    <meta name="description" content="未来の私をデザインする、日本一ポジティブな商業高校。福岡女子商業高等学校の公式ホームページです。">
+    
+    <!-- Google Fonts: 親しみやすさと大人かわいさを両立する丸ゴシックと、視認性の高いゴシック体 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Zen+Maru+Gothic:wght@400;500;700;900&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Tailwind CSS (CDN) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        // 女子商カラーの最適化
+                        brand: {
+                            orange: '#FF8A5B', // 情熱・活気（少し柔らかいオレンジ）
+                            blue: '#4DB6AC',   // 誠実・知性（爽やかな水色）
+                            dark: '#334155',   // テキスト基本色
+                            light: '#F8FAFC',  // 背景色
+                            line: '#06C755',   // LINEカラー
+                        }
+                    },
+                    fontFamily: {
+                        // 見出しは丸ゴシック、本文はNoto Sansでメリハリを
+                        heading: ['"Zen Maru Gothic"', 'sans-serif'],
+                        sans: ['"Noto Sans JP"', 'sans-serif'],
+                    },
+                    boxShadow: {
+                        'soft': '0 4px 20px -2px rgba(0, 0, 0, 0.05)',
+                        'float': '0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1)',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* カスタムスタイル・アニメーション */
+        body {
+            -webkit-font-smoothing: antialiased;
+            /* スマホの下部固定メニュー用の余白 */
+            padding-bottom: 60px; 
+        }
+        @media (min-width: 768px) {
+            body { padding-bottom: 0; }
+        }
+        
+        .blob-shape {
+            border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
+            animation: morph 8s ease-in-out infinite;
+        }
+        
+        @keyframes morph {
+            0%, 100% { border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%; }
+            34% { border-radius: 70% 30% 50% 50% / 30% 30% 70% 70%; }
+            67% { border-radius: 100% 60% 60% 100% / 100% 100% 60% 60%; }
+        }
+
+        .fade-in-up {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        .fade-in-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* スムーススクロール */
+        html { scroll-behavior: smooth; }
+    </style>
+</head>
+<body class="bg-brand-light text-brand-dark font-sans overflow-x-hidden">
+
+    <!-- Header (PC & Mobile) -->
+    <header class="fixed w-full top-0 z-50 bg-white/90 backdrop-blur-md shadow-sm transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo -->
+                <div class="flex-shrink-0 flex items-center">
+                    <a href="#" class="font-heading font-black text-2xl text-brand-dark tracking-tight flex items-center gap-2">
+                        <span class="w-8 h-8 rounded-full bg-brand-orange text-white flex items-center justify-center text-sm"><i class="fa-solid fa-school"></i></span>
+                        福岡女子商業
+                    </a>
+                </div>
+                
+                <!-- PC Navigation -->
+                <nav class="hidden md:flex space-x-8 items-center">
+                    <a href="#concept" class="text-gray-600 hover:text-brand-orange font-medium transition-colors">女子商とは</a>
+                    <a href="#learning" class="text-gray-600 hover:text-brand-orange font-medium transition-colors">学びの特長</a>
+                    <a href="#stories" class="text-gray-600 hover:text-brand-orange font-medium transition-colors">先輩のストーリー</a>
+                    <a href="#parents" class="text-gray-600 hover:text-brand-blue font-medium transition-colors">保護者の方へ</a>
+                    
+                    <div class="flex items-center gap-3 pl-4 border-l border-gray-200">
+                        <a href="#reserve" class="bg-brand-orange text-white px-5 py-2.5 rounded-full font-bold hover:bg-orange-600 transition-all shadow-md hover:shadow-float transform hover:-translate-y-0.5">
+                            <i class="fa-solid fa-calendar-check mr-2"></i>オーキャン予約
+                        </a>
+                        <a href="#line" class="bg-brand-line text-white px-5 py-2.5 rounded-full font-bold hover:bg-green-600 transition-all shadow-md hover:shadow-float transform hover:-translate-y-0.5">
+                            <i class="fa-brands fa-line mr-2"></i>LINE登録
+                        </a>
+                    </div>
+                </nav>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-gray-600 hover:text-brand-dark focus:outline-none p-2">
+                        <i class="fa-solid fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Panel -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-100 absolute w-full left-0 top-20 shadow-lg">
+            <div class="px-4 pt-2 pb-6 space-y-1">
+                <a href="#concept" class="block px-3 py-4 text-base font-medium text-gray-700 border-b border-gray-50">女子商とは</a>
+                <a href="#learning" class="block px-3 py-4 text-base font-medium text-gray-700 border-b border-gray-50">学びの特長</a>
+                <a href="#stories" class="block px-3 py-4 text-base font-medium text-gray-700 border-b border-gray-50">先輩のストーリー</a>
+                <a href="#parents" class="block px-3 py-4 text-base font-medium text-gray-700 border-b border-gray-50">保護者の方へ</a>
+                <a href="#news" class="block px-3 py-4 text-base font-medium text-gray-700">最新情報・SNS</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Bottom Fixed Action Bar (スマホファースト：親指アクセス) -->
+    <div class="md:hidden fixed bottom-0 left-0 w-full z-50 bg-white shadow-[0_-5px_15px_rgba(0,0,0,0.05)] flex rounded-t-2xl overflow-hidden">
+        <a href="#reserve" class="flex-1 py-3 flex flex-col items-center justify-center text-brand-orange bg-white active:bg-orange-50 transition-colors">
+            <i class="fa-solid fa-calendar-check text-xl mb-1"></i>
+            <span class="text-[11px] font-bold">オーキャン予約</span>
+        </a>
+        <a href="#line" class="flex-1 py-3 flex flex-col items-center justify-center bg-brand-line text-white active:bg-green-600 transition-colors">
+            <i class="fa-brands fa-line text-xl mb-1"></i>
+            <span class="text-[11px] font-bold">LINE友だち登録</span>
+        </a>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="relative pt-28 pb-16 md:pt-32 md:pb-24 overflow-hidden">
+        <!-- Background Decorative Elements -->
+        <div class="absolute top-20 -right-20 w-64 h-64 bg-brand-orange/10 blob-shape -z-10"></div>
+        <div class="absolute -bottom-10 -left-10 w-72 h-72 bg-brand-blue/10 blob-shape -z-10" style="animation-delay: 2s;"></div>
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+            <div class="flex flex-col md:flex-row items-center gap-12">
+                <!-- Text Content -->
+                <div class="w-full md:w-1/2 pt-8 md:pt-0 fade-in-up">
+                    <span class="inline-block py-1 px-3 rounded-full bg-orange-100 text-brand-orange font-bold text-sm mb-4">
+                        日本一ポジティブな商業高校
+                    </span>
+                    <h1 class="font-heading font-black text-4xl md:text-5xl lg:text-6xl leading-tight mb-6 text-brand-dark">
+                        未来の私を<br>
+                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-orange to-brand-blue">デザイン</span>する。
+                    </h1>
+                    <p class="text-lg text-gray-600 mb-8 font-medium leading-relaxed">
+                        「普通科でいいのかな？」「商業って難しそう」<br>
+                        そんな不安は、ここでワクワクに変わる。<br>
+                        あなたの可能性が広がる場所が、ここにあります。
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <a href="#reserve" class="bg-brand-orange text-white text-center px-8 py-4 rounded-full font-bold text-lg hover:bg-orange-600 transition-all shadow-lg hover:shadow-float">
+                            オープンキャンパスに行く！
+                        </a>
+                        <a href="#docs" class="bg-white border-2 border-brand-blue text-brand-blue text-center px-8 py-4 rounded-full font-bold text-lg hover:bg-blue-50 transition-all">
+                            まずは資料請求
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Hero Image -->
+                <div class="w-full md:w-1/2 relative fade-in-up" style="transition-delay: 0.2s;">
+                    <!-- Placeholder with gradients representing energetic students -->
+                    <div class="relative w-full aspect-square md:aspect-[4/3] rounded-3xl overflow-hidden shadow-2xl">
+                        <div class="absolute inset-0 bg-gradient-to-tr from-orange-200 to-blue-200 opacity-80 mix-blend-multiply z-10"></div>
+                        <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="笑顔の女子高生たち" class="w-full h-full object-cover">
+                        
+                        <!-- Floating Badges -->
+                        <div class="absolute top-6 -left-6 bg-white py-2 px-4 rounded-2xl shadow-float z-20 flex items-center gap-2 animate-bounce" style="animation-duration: 3s;">
+                            <span class="text-2xl">✨</span>
+                            <span class="font-bold font-heading text-sm">資格取得率 驚異の実績!</span>
+                        </div>
+                        <div class="absolute bottom-10 -right-4 bg-white py-2 px-4 rounded-2xl shadow-float z-20 flex items-center gap-2 animate-bounce" style="animation-duration: 4s;">
+                            <span class="text-2xl">💖</span>
+                            <span class="font-bold font-heading text-sm">毎日が楽しい！</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Concept Section -->
+    <section id="concept" class="py-16 md:py-24 bg-white">
+        <div class="max-w-4xl mx-auto px-4 text-center fade-in-up">
+            <h2 class="font-heading font-bold text-3xl md:text-4xl mb-6">「難しい」を「楽しい」へ。</h2>
+            <p class="text-gray-600 leading-relaxed md:text-lg">
+                商業の勉強って、計算ばかりで難しそう？<br>
+                いいえ、女子商の授業は違います。<br>
+                ゲーム感覚で解ける簿記、デザインも学べる情報処理。<br>
+                社会に出たとき「私、これができる！」と胸を張れるスキルを、<br>
+                図解や実践を通じて楽しく身につけます。
+            </p>
+        </div>
+    </section>
+
+    <!-- Learning Features (独自の価値) -->
+    <section id="learning" class="py-16 md:py-24 bg-brand-light">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 fade-in-up">
+                <span class="text-brand-blue font-bold tracking-wider text-sm">WHAT YOU LEARN</span>
+                <h2 class="font-heading font-bold text-3xl md:text-4xl mt-2">女子商で身につく３つの「無双スキル」</h2>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Feature 1 -->
+                <div class="bg-white rounded-3xl p-8 shadow-soft hover:shadow-float transition-all duration-300 transform hover:-translate-y-2 fade-in-up">
+                    <div class="w-16 h-16 rounded-2xl bg-orange-100 flex items-center justify-center mb-6 text-brand-orange text-3xl">
+                        <i class="fa-solid fa-calculator"></i>
+                    </div>
+                    <h3 class="font-heading font-bold text-xl mb-3">パズルみたいに面白い「簿記」</h3>
+                    <p class="text-gray-600 text-sm leading-relaxed mb-4">
+                        数字の羅列じゃありません。会社の「お金の流れ」を解き明かすパズルゲーム。基本から丁寧に教えるから、数字が苦手だった先輩も次々と上位資格に合格しています。
+                    </p>
+                    <a href="#" class="text-brand-orange font-bold text-sm flex items-center gap-1 group">
+                        詳しく見る <i class="fa-solid fa-arrow-right transform group-hover:translate-x-1 transition-transform"></i>
+                    </a>
+                </div>
+
+                <!-- Feature 2 -->
+                <div class="bg-white rounded-3xl p-8 shadow-soft hover:shadow-float transition-all duration-300 transform hover:-translate-y-2 fade-in-up" style="transition-delay: 0.1s;">
+                    <div class="w-16 h-16 rounded-2xl bg-blue-100 flex items-center justify-center mb-6 text-brand-blue text-3xl">
+                        <i class="fa-solid fa-laptop-code"></i>
+                    </div>
+                    <h3 class="font-heading font-bold text-xl mb-3">魔法の杖を手に入れる「情報処理」</h3>
+                    <p class="text-gray-600 text-sm leading-relaxed mb-4">
+                        タイピングから始まり、Word、Excelはもちろん、Webデザインや動画編集の基礎まで。スマホだけじゃない、PCを自在に操る「仕事で一番使えるスキル」をマスターします。
+                    </p>
+                    <a href="#" class="text-brand-blue font-bold text-sm flex items-center gap-1 group">
+                        詳しく見る <i class="fa-solid fa-arrow-right transform group-hover:translate-x-1 transition-transform"></i>
+                    </a>
+                </div>
+
+                <!-- Feature 3 -->
+                <div class="bg-white rounded-3xl p-8 shadow-soft hover:shadow-float transition-all duration-300 transform hover:-translate-y-2 fade-in-up" style="transition-delay: 0.2s;">
+                    <div class="w-16 h-16 rounded-2xl bg-pink-100 flex items-center justify-center mb-6 text-pink-500 text-3xl">
+                        <i class="fa-solid fa-handshake-angle"></i>
+                    </div>
+                    <h3 class="font-heading font-bold text-xl mb-3">大人の階段を登る「ビジネスマナー」</h3>
+                    <p class="text-gray-600 text-sm leading-relaxed mb-4">
+                        正しい言葉遣いや電話応対、名刺の渡し方。高校生のうちから「社会人の当たり前」を身につけることで、就職面接や進学時の面接で圧倒的な自信と差がつきます。
+                    </p>
+                    <a href="#" class="text-pink-500 font-bold text-sm flex items-center gap-1 group">
+                        詳しく見る <i class="fa-solid fa-arrow-right transform group-hover:translate-x-1 transition-transform"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stories (先輩の声) -->
+    <section id="stories" class="py-16 md:py-24 bg-white relative overflow-hidden">
+        <!-- Decoration -->
+        <div class="absolute top-0 right-0 w-1/3 h-full bg-orange-50 rounded-l-full -z-10 opacity-50"></div>
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-12 fade-in-up">
+                <div>
+                    <span class="text-brand-orange font-bold tracking-wider text-sm">STORIES</span>
+                    <h2 class="font-heading font-bold text-3xl md:text-4xl mt-2">先輩たちの成長ストーリー</h2>
+                </div>
+                <a href="#" class="hidden md:inline-flex items-center gap-2 text-brand-dark font-bold hover:text-brand-orange transition-colors">
+                    もっと見る <i class="fa-solid fa-circle-arrow-right text-xl"></i>
+                </a>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Story Card 1 -->
+                <div class="group cursor-pointer fade-in-up">
+                    <div class="relative overflow-hidden rounded-3xl aspect-[4/3] md:aspect-[16/9] mb-4 shadow-md">
+                        <img src="https://images.unsplash.com/photo-1577896851231-70ef18881754?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="先輩のインタビュー" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                        <div class="absolute bottom-4 left-6 right-6">
+                            <span class="bg-brand-blue text-white text-xs font-bold px-3 py-1 rounded-full mb-2 inline-block">就職内定</span>
+                            <h3 class="text-white font-heading font-bold text-xl line-clamp-2">「普通科じゃ見つけられなかった、私のやりたい仕事。」</h3>
+                        </div>
+                    </div>
+                    <p class="text-gray-500 text-sm font-medium">3年生 / 地元優良企業 事務職内定</p>
+                </div>
+
+                <!-- Story Card 2 -->
+                <div class="group cursor-pointer fade-in-up" style="transition-delay: 0.1s;">
+                    <div class="relative overflow-hidden rounded-3xl aspect-[4/3] md:aspect-[16/9] mb-4 shadow-md">
+                        <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="先輩のインタビュー" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                        <div class="absolute bottom-4 left-6 right-6">
+                            <span class="bg-brand-orange text-white text-xs font-bold px-3 py-1 rounded-full mb-2 inline-block">大学進学</span>
+                            <h3 class="text-white font-heading font-bold text-xl line-clamp-2">「数字が苦手だった私が、簿記1級を取って推薦で大学へ！」</h3>
+                        </div>
+                    </div>
+                    <p class="text-gray-500 text-sm font-medium">卒業生 / 有名私立大学 商学部進学</p>
+                </div>
+            </div>
+            
+            <!-- Mobile More Button -->
+            <div class="mt-8 text-center md:hidden">
+                <a href="#" class="inline-flex items-center justify-center w-full py-4 border-2 border-brand-orange text-brand-orange font-bold rounded-xl">
+                    ストーリーをもっと見る
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- SNS & News (Instagram連携風) -->
+    <section id="news" class="py-16 md:py-24 bg-brand-light">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12 fade-in-up">
+                <h2 class="font-heading font-bold text-3xl md:text-4xl">女子商の「今」をお届け！</h2>
+                <p class="text-gray-600 mt-4">リアルな学校生活やイベント情報をSNSで発信中📱✨</p>
+            </div>
+
+            <!-- Instagram Style Grid -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 mb-12">
+                <!-- Post 1 -->
+                <a href="#" class="group block relative aspect-square rounded-2xl overflow-hidden shadow-sm fade-in-up">
+                    <img src="https://images.unsplash.com/photo-1541339907198-e08756dedf3f?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=60" alt="体育祭" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                        <i class="fa-brands fa-instagram text-white text-3xl"></i>
+                    </div>
+                </a>
+                <!-- Post 2 -->
+                <a href="#" class="group block relative aspect-square rounded-2xl overflow-hidden shadow-sm fade-in-up" style="transition-delay: 0.1s;">
+                    <img src="https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=60" alt="授業風景" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                        <i class="fa-brands fa-instagram text-white text-3xl"></i>
+                    </div>
+                </a>
+                <!-- Post 3 -->
+                <a href="#" class="group block relative aspect-square rounded-2xl overflow-hidden shadow-sm fade-in-up" style="transition-delay: 0.2s;">
+                    <img src="https://images.unsplash.com/photo-1523580494863-6f3031224c94?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=60" alt="文化祭" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                        <i class="fa-brands fa-instagram text-white text-3xl"></i>
+                    </div>
+                </a>
+                <!-- Post 4 -->
+                <a href="#" class="group block relative aspect-square rounded-2xl overflow-hidden shadow-sm fade-in-up" style="transition-delay: 0.3s;">
+                    <img src="https://images.unsplash.com/photo-1427504494785-3a9ca7044f45?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=60" alt="資格取得" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                        <i class="fa-brands fa-instagram text-white text-3xl"></i>
+                    </div>
+                </a>
+            </div>
+
+            <div class="text-center fade-in-up">
+                <a href="#" class="inline-flex items-center gap-2 bg-gradient-to-r from-purple-500 to-pink-500 text-white px-8 py-3 rounded-full font-bold shadow-md hover:shadow-float transform hover:-translate-y-0.5 transition-all">
+                    <i class="fa-brands fa-instagram text-xl"></i> 公式Instagramを見る
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- For Parents (保護者の方へ - PC閲覧を意識した落ち着いたトーン) -->
+    <section id="parents" class="py-16 md:py-24 bg-white border-t border-gray-100">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="bg-slate-50 rounded-3xl p-8 md:p-12 shadow-inner fade-in-up">
+                <div class="flex flex-col md:flex-row gap-12 items-center">
+                    <div class="w-full md:w-1/2">
+                        <h2 class="font-heading font-bold text-2xl md:text-3xl mb-4 text-brand-dark">保護者の皆様へ</h2>
+                        <p class="text-gray-600 mb-6 leading-relaxed">
+                            大切なお子様の将来のために。福岡女子商業高等学校では、卒業後の進路（就職・進学）まで見据えた手厚いサポート体制を整えています。<br>
+                            高い就職率や指定校推薦枠、学費の支援制度など、安心してお預けいただける環境をご用意しています。
+                        </p>
+                        <ul class="space-y-3 mb-8">
+                            <li class="flex items-center gap-3 text-gray-700 font-medium">
+                                <i class="fa-solid fa-check-circle text-brand-blue"></i> 地元優良企業への高い就職実績
+                            </li>
+                            <li class="flex items-center gap-3 text-gray-700 font-medium">
+                                <i class="fa-solid fa-check-circle text-brand-blue"></i> 商業科枠を利用した有利な大学進学
+                            </li>
+                            <li class="flex items-center gap-3 text-gray-700 font-medium">
+                                <i class="fa-solid fa-check-circle text-brand-blue"></i> 資格取得のための補習・個別指導
+                            </li>
+                        </ul>
+                        <a href="#" class="inline-flex items-center gap-2 text-brand-blue font-bold hover:underline">
+                            進路実績・学費について詳しく見る <i class="fa-solid fa-arrow-right"></i>
+                        </a>
+                    </div>
+                    <div class="w-full md:w-1/2">
+                        <!-- Chart Placeholder or Professional Image -->
+                        <div class="bg-white p-6 rounded-2xl shadow-md border border-gray-100">
+                            <h3 class="text-center font-bold text-gray-700 mb-4">昨年度 卒業生進路状況</h3>
+                            <div class="flex h-32 items-end gap-2 mb-2">
+                                <div class="w-1/2 bg-brand-blue rounded-t-lg relative group flex justify-center items-end" style="height: 60%;">
+                                    <span class="absolute -top-6 font-bold text-sm text-brand-blue">就職 60%</span>
+                                </div>
+                                <div class="w-1/2 bg-brand-orange rounded-t-lg relative flex justify-center items-end" style="height: 40%;">
+                                    <span class="absolute -top-6 font-bold text-sm text-brand-orange">進学 40%</span>
+                                </div>
+                            </div>
+                            <p class="text-xs text-center text-gray-500 mt-4">※希望者就職率 100%達成！</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-20 bg-gradient-to-br from-brand-orange to-pink-400 text-white text-center">
+        <div class="max-w-4xl mx-auto px-4 fade-in-up">
+            <h2 class="font-heading font-black text-3xl md:text-5xl mb-6">女子商で、新しい自分を始めよう！</h2>
+            <p class="text-lg md:text-xl mb-10 opacity-90">まずはオープンキャンパスで、学校の雰囲気を体感してください。</p>
+            
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <a href="#reserve" class="bg-white text-brand-orange px-8 py-4 rounded-full font-bold text-lg hover:bg-gray-50 transition-all shadow-lg flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-calendar-check"></i> オープンキャンパス予約
+                </a>
+                <a href="#line" class="bg-[#06C755] text-white border-2 border-transparent px-8 py-4 rounded-full font-bold text-lg hover:bg-green-600 transition-all shadow-lg flex items-center justify-center gap-2">
+                    <i class="fa-brands fa-line text-xl"></i> LINEで質問・相談する
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-brand-dark text-gray-300 py-12 border-t-4 border-brand-orange">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8 border-b border-gray-700 pb-8">
+                <div class="col-span-1 md:col-span-2">
+                    <a href="#" class="font-heading font-black text-2xl text-white tracking-tight flex items-center gap-2 mb-4">
+                        <span class="w-8 h-8 rounded-full bg-brand-orange text-white flex items-center justify-center text-sm"><i class="fa-solid fa-school"></i></span>
+                        福岡女子商業高等学校
+                    </a>
+                    <p class="text-sm leading-relaxed mb-4">
+                        〒811-1200<br>
+                        福岡県那珂川市〇〇町1-2-3<br>
+                        TEL: 092-123-4567 / FAX: 092-123-4568
+                    </p>
+                    <div class="flex gap-4">
+                        <a href="#" class="w-10 h-10 rounded-full bg-gray-700 flex items-center justify-center hover:bg-brand-orange transition-colors"><i class="fa-brands fa-instagram text-white"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-gray-700 flex items-center justify-center hover:bg-[#06C755] transition-colors"><i class="fa-brands fa-line text-white"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-gray-700 flex items-center justify-center hover:bg-blue-600 transition-colors"><i class="fa-brands fa-facebook-f text-white"></i></a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4 class="text-white font-bold mb-4 border-b border-gray-700 pb-2">学校について</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#" class="hover:text-brand-orange transition-colors">校長メッセージ</a></li>
+                        <li><a href="#" class="hover:text-brand-orange transition-colors">教育方針・カリキュラム</a></li>
+                        <li><a href="#" class="hover:text-brand-orange transition-colors">進路実績</a></li>
+                        <li><a href="#" class="hover:text-brand-orange transition-colors">部活動・生徒会</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-white font-bold mb-4 border-b border-gray-700 pb-2">入学案内</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#" class="hover:text-brand-orange transition-colors">オープンキャンパス</a></li>
+                        <li><a href="#" class="hover:text-brand-orange transition-colors">募集要項・学費</a></li>
+                        <li><a href="#" class="hover:text-brand-orange transition-colors">よくある質問</a></li>
+                        <li><a href="#" class="hover:text-brand-orange transition-colors">資料請求</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="text-center text-xs text-gray-500">
+                <p>&copy; 2026 Fukuoka Joshi Shogyo High School. All Rights Reserved.</p>
+                <div class="mt-2 space-x-4">
+                    <a href="#" class="hover:text-white">プライバシーポリシー</a>
+                    <a href="#" class="hover:text-white">サイトマップ</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript for Interactivity -->
+    <script>
+        // ハンバーガーメニューの切り替え
+        const btn = document.getElementById('mobile-menu-btn');
+        const menu = document.getElementById('mobile-menu');
+        const icon = btn.querySelector('i');
+
+        btn.addEventListener('click', () => {
+            menu.classList.toggle('hidden');
+            if (menu.classList.contains('hidden')) {
+                icon.classList.remove('fa-xmark');
+                icon.classList.add('fa-bars');
+            } else {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-xmark');
+            }
+        });
+
+        // モバイルメニューのリンクをクリックしたらメニューを閉じる
+        const mobileLinks = menu.querySelectorAll('a');
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                menu.classList.add('hidden');
+                icon.classList.remove('fa-xmark');
+                icon.classList.add('fa-bars');
+            });
+        });
+
+        // スクロール時のフェードインアニメーション
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target); // 一度表示されたら監視を解除
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in-up').forEach(element => {
+            observer.observe(element);
+        });
+    </script>
+</body>
+</html>
